@@ -36,6 +36,20 @@ $aboutPage = array(
   )
 );
 
+$apiDocs = array(
+  'examples' => array(
+    '/api.php?page={pagename}',
+    '/api.php?page=about',
+    '/api.php?page=home',
+    '/api.php?page=nav',
+  ),
+  'pages' => array(
+    'about',
+    'home',
+    'nav',
+  ),
+);
+
 $errorPage = array(
   'title' => '400 - Bad Request',
   'messages' => array(
@@ -50,15 +64,15 @@ $routes = array(
   'nav' => $navLinks,
 );
 
+$response = $errorPage;
+
 if (isset($_REQUEST['page'])) {
   $decoded = $_REQUEST['page'];
   if (array_key_exists($decoded, $routes)) {
     $response = $routes[$decoded];
-  } else {
-    $response = $errorPage;
   }
 } else {
-  $response = $errorPage;
+  $response = $apiDocs;
 }
 
 $encoded = json_encode($response);
