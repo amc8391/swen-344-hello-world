@@ -8,8 +8,14 @@ $homePage = array(
 
 $navLinks = array(
   'links' => array(
-    'title' => 'About Me',
-    'href' => 'about',
+    array(
+      'title' => 'About Me',
+      'href' => 'about',
+    ),
+    array(
+      'title' => 'Home',
+      'href' => 'home',
+    ),
   ),
 );
 
@@ -30,7 +36,7 @@ $aboutPage = array(
       'alt' => 'of Montreal - False Priest',
     ),
     array(
-      'src' => 'https://en.wikipedia.org/wiki/Doolittle_(album)#/media/File:Pixies-Doolittle.jpg',
+      'src' => 'https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg',
       'alt' => 'Pixies - Doolittle',
     ),
   )
