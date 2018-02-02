@@ -3,14 +3,18 @@
     .navLink {
       list-style-type: none;
     }
-  </style>
+    .frameworkLogo {
+      width: 200px;
+      height: 200px;
+    }
+    </style>
   <div class="header">
     <ul>
       <li class="navLink" repeat.for="link of navLinks">
         <a route-href="route.bind: link.href">${link.title}</a>
       </li>
     </ul>
-    <a href="http://aurelia.io/"><img src="https://seeklogo.com/images/A/aurelia-logo-9E30F60D7E-seeklogo.com.png"></a>
+    <a href="http://aurelia.io/"><img class="frameworkLogo" src="https://seeklogo.com/images/A/aurelia-logo-9E30F60D7E-seeklogo.com.png"></a>
   </div>
   <router-view></router-view>
 </template>
