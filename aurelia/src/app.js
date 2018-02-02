@@ -1,3 +1,5 @@
+import apiconnector from './apiconnector';
+
 export class App {
   configureRouter(config, router) {
     config.title = 'Aurelia Hello World!';
@@ -10,15 +12,11 @@ export class App {
     this.router = router;
   }
   constructor() {
-    console.log('THE NAVBAR HAS LOADED');
     this.links = [];
-    fetch('http://localhost/api.php?page=nav')
-    .then((response) => {
-      response.json()
-        .then((responseData) => {
-          this.navLinks = responseData.links;
-          console.log(this.links);
-        });
+    apiconnector.getPage('nav')
+    .then((responseData) => {
+      this.navLinks = responseData.links;
+      console.log(responseData);
     });
   }
 
