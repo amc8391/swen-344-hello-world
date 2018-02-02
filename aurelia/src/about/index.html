@@ -5,10 +5,8 @@
       height: 200px;
     }
   </style>
-  <section>
-    <h1>${title}</h1>
-    <p repeat.for="message of messages">${message}</p>
-    <img class="albumImage" repeat.for="image of images" src.bind="image.src" alt.bind="image.alt">
-  </section>
+  <h1>${title}</h1>
+  <p repeat.for="message of messages">${message}</p>
+  <img class="albumImage" repeat.for="image of images" src.bind="image.src" alt.bind="image.alt">
 </template>
   
