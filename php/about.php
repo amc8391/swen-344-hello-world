@@ -1,8 +1,8 @@
 <?php
-$page_content = json_decode(file_get_contents('http://localhost/api.php?page=about'));
-
 echo('<html><body>');
 include('navbar.php');
+$page_content = json_decode(file_get_contents($api_endpoint . '?page=about'));
+
 echo('<div>');
 echo('<h1>' . $page_content->title . '</h1>');
 

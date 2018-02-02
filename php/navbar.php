@@ -1,5 +1,6 @@
 <?php
-$nav_content = json_decode(file_get_contents('http://localhost/api.php?page=nav'));
+require('env.php');
+$nav_content = json_decode(file_get_contents($api_endpoint . '?page=nav'));
 
 echo('<div>');
 
