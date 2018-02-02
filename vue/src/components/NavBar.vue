@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import apiconnector from '../apiconnector';
+
 export default {
   name: 'NavBar',
   data() {
@@ -23,13 +25,9 @@ export default {
     fetchData() {
       this.title = null;
       this.messages = [];
-      fetch('http://localhost/api.php?page=nav')
-        .then((response) => {
-          response.json()
-            .then((responseData) => {
-              this.navLinks = responseData.links;
-              console.log(this.navLinks);
-            });
+      apiconnector.getPage('nav')
+        .then((responseData) => {
+          this.navLinks = responseData.links;
         });
     },
   },

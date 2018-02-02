@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import apiconnector from '../apiconnector';
+
 export default {
   name: 'About',
   data() {
@@ -26,17 +28,11 @@ export default {
     fetchData() {
       this.title = null;
       this.messages = [];
-      fetch('http://localhost/api.php?page=about')
-        .then((response) => {
-          response.json()
-            .then((responseData) => {
-              this.title = responseData.title;
-              this.messages = responseData.messages;
-              this.images = responseData.images;
-              console.log(this.title);
-              console.log(this.messages);
-              console.log(this.images);
-            });
+      apiconnector.getPage('about')
+        .then((responseData) => {
+          this.title = responseData.title;
+          this.messages = responseData.messages;
+          this.images = responseData.images;
         });
     },
   },

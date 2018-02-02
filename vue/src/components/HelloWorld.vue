@@ -8,15 +8,14 @@
 </template>
 
 <script>
+import apiconnector from '../apiconnector';
+
 export default {
   name: 'HelloWorld',
   data() {
     return {
-      title: 'asdf',
-      messages: [
-        'message 1',
-        'message 2',
-      ],
+      title: '',
+      messages: [],
     };
   },
   created() {
@@ -26,15 +25,10 @@ export default {
     fetchData() {
       this.title = null;
       this.messages = [];
-      fetch('http://localhost/api.php?page=home')
-        .then((response) => {
-          response.json()
-            .then((responseData) => {
-              this.title = responseData.title;
-              this.messages = responseData.messages;
-              console.log(this.title);
-              console.log(this.messages);
-            });
+      apiconnector.getPage('home')
+        .then((responseData) => {
+          this.title = responseData.title;
+          this.messages = responseData.messages;
         });
     },
   },
