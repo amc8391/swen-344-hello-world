@@ -1,4 +1,7 @@
 <?php
+// // Uncomment for remote testing
+// header("Access-Control-Allow-Origin: *");
+
 $homePage = array(
   'title' => 'Hello World!',
   'messages' => array(
@@ -9,12 +12,12 @@ $homePage = array(
 $navLinks = array(
   'links' => array(
     array(
-      'title' => 'About Me',
-      'href' => 'about',
+      'title' => 'Hello World',
+      'href' => 'home',
     ),
     array(
-      'title' => 'Home',
-      'href' => 'home',
+      'title' => 'About Me',
+      'href' => 'about',
     ),
   ),
 );
@@ -24,6 +27,7 @@ $aboutPage = array(
   'messages' => array(
     'My name is Alex Christodoulou and I\'m a 5th year Software Engineering major at RIT.',
     'I\'m a big fan of video games, board games, music and hiking.',
+    'In this course I hope to learn more about interoperability between different web technologies. I think I have a pretty good grasp on a few select tools, but I don\'t know why someone would use one over another.',
     'Here\'s a few of my favorite albums:',
   ),
   'images' => array(
