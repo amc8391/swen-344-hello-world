@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>HTML5 Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h2>Video</h2>
+  <video controls> 
+    <source src="http://techslides.com/demos/sample-videos/small.webm" type=video/webm> 
+    <source src="http://techslides.com/demos/sample-videos/small.ogv" type=video/ogg> 
+    <source src="http://techslides.com/demos/sample-videos/small.mp4" type=video/mp4>
+    <source src="http://techslides.com/demos/sample-videos/small.3gp" type=video/3gp>
+  </video>
+  <h2>Audio</h2>
+  <audio controls>
+    <source src="http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3" /> 
+    <source src="http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg" /> 
+  </audio>
+  <h2>Canvas</h2>
+  <canvas style="height:150px; width: 150px"></canvas>
+  <h2>Required Input</h2>
+  <input required type="text">
+  <h2>Editable Content</h2>
+  <p contenteditable="true">
+    This is some editable content
+  </p>
+  <p>Count numbers: <output id="result"></output></p>
+  <button onclick="startWorker()">Start Worker</button> 
+  <button onclick="stopWorker()">Stop Worker</button>
+
+  <p><strong>Note:</strong> Internet Explorer 9 and earlier versions do not support Web Workers.</p>
+
+  <script>
+  var w;
+
+  function startWorker() {
+      if(typeof(Worker) !== "undefined") {
+          if(typeof(w) == "undefined") {
+              w = new Worker("demo_workers.js");
+          }
+          w.onmessage = function(event) {
+              document.getElementById("result").innerHTML = event.data;
+          };
+      } else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+      }
+  }
+
+  function stopWorker() { 
+      w.terminate();
+      w = undefined;
+  }
+  </script>
+
+</body>
+</html>
