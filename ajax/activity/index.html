@@ -1,0 +1,40 @@
+<html>
+  <head></head>
+  <body>
+    <h1>Hello World</h1>
+    <div class="user-info">
+      <div><label>Name:</label><span class="name"></span></div>
+      <div><label>Age:</label><span class="age"></span></div>
+      <div><label>Hometown:</label><span class="hometown"></span></div>
+    </div>
+    <button type="button" onclick="vm.loadUserInfo('file1.json')">Load File 1 (Malformed)</button>
+    <button type="button" onclick="vm.loadUserInfo('file2.json')">Load File 2 (Well-Formed)</button>
+
+    <h1> RSS Reader Example </h1>
+    <form>
+      <input type='radio' name='sport' value='MLB' checked /> MLB <br />
+      <input type='radio' name='sport' value='NBA' /> NBA <br />
+      <input type='radio' name='sport' value='NFL' /> NFL <br />
+      <input type='radio' name='sport' value='NHL' /> NHL <br />
+    </form>
+
+    <div id="content">
+
+    </div>
+    <!-- <div class="infinite-scroll">
+      <article class="post"></article>
+    </div>
+
+    <a class="pagination__next" href="random.html">Next page</a> -->
+
+    <!-- jQuery Core -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <!-- Infinite Scroll
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script> -->
+    <!-- Page Logic -->
+    <script src="app.js"></script>
+  </body>
+</html>
