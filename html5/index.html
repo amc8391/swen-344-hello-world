@@ -27,11 +27,10 @@
   <p contenteditable="true">
     This is some editable content
   </p>
-  <p>Count numbers: <output id="result"></output></p>
+  <h2>Web Worker</h2>
+  <p>Current Time: <output id="result"></output></p>
   <button onclick="startWorker()">Start Worker</button> 
   <button onclick="stopWorker()">Stop Worker</button>
-
-  <p><strong>Note:</strong> Internet Explorer 9 and earlier versions do not support Web Workers.</p>
 
   <script>
   var w;
@@ -55,5 +54,19 @@
   }
   </script>
 
+  <h2>Local Form</h2>
+  <form id="localForm">
+    <label for="fName">First Name</label>
+    <input name="fName" type="text" required>
+    <label for="lName">Last Name</label>
+    <input name="lName" type="text" required>
+    <label for="address">Address</label>
+    <input name="address" type="text" required>
+    <label for="phone">Phone Number</label>
+    <input name="phone" type="text" required>
+    <button type="button" onclick="saveLocalForm()">Save Data</button>    
+  </form>
+  
+  <script src="local_form.js"></script>
 </body>
 </html>
