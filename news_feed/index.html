@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>News Feed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loginForm">
+    <div>
+      <label for="username">Username</label>
+      <input type="text" name="username">
+    </div>
+    <div>
+      <label for="pass">Password</label>
+      <input type="password" name="password">
+    </div>
+    <button id="login">Log In</button>
+    <button id="register">Register</button>
+  </div>
+
+
+  <div id="newsFeed" hidden>
+    <label>Sports</label>
+    <ul class="rss-feed-options">
+      <li><input type="checkbox" value="NFL" checked>NFL</li>
+      <li><input type="checkbox" value="NHL" checked>NHL</li>
+      <li><input type="checkbox" value="MLB" checked>MLB</li>
+    </ul>
+    <div id="storyList"></div>
+  </div>
+  
+  <!-- jQuery Core -->
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+  </script>
+
+  <!-- Page Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
