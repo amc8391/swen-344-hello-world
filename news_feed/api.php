@@ -13,11 +13,38 @@ function get_favorites($username, $password) {
 }
 
 function add_favorite($username, $password, $favorite) {
-  // TODO
+  $userList = load_users();
+  $selectedUser = NULL;
+  foreach ($userList->users as $user) {
+    if ($user->username === $username && $user->password === $password) {
+      $selectedUser = $user;
+      break;
+    }
+  }
+  
+  if ($selectedUser != NULL) {
+    array_push($selectedUser->favorites, json_decode($favorite));
+    $save_users($userList);
+  } else {
+    error();
+  }
 }
 
-function delete_favorite($username, $password, $favorite) {
-  // TODO
+function remove_favorite($username, $password, $favorite) {
+  $userList = load_users();
+  $selectedUser = NULL;
+  foreach ($userList->users as $user) {
+    if ($user->username === $username && $user->password === $password) {
+      for ($i=0; $i < count($user->favorites); $i++) { 
+        if ($user->favorites[$i]->guid === $favorite->guid){
+          unset($user->favorites[$i]);
+        }
+        break;
+      }
+    }
+  }
+  
+  $save_users($userList);
 }
 
 function load_users() {
@@ -39,20 +66,43 @@ function save_users($usersList) {
 function register_user($username, $password) {
   $userList = load_users();
 
-  $newUser = array(
-    'username' => $username,
-    'password' => $password,
-    'favorites' => array()
-  );
+  $user_exists = FALSE;
+  foreach ($userList->users as $user) {
+    if ($user->username === $username) {
+      $user_exists = TRUE;
+      break;
+    }
+  }
 
-  array_push($userList->users, $newUser);
-  save_users($userList);
+  if (!$user_exists) {
+    $newUser = array(
+      'username' => $username,
+      'password' => $password,
+      'favorites' => array()
+    );
+  
+    array_push($userList->users, $newUser);
+    save_users($userList);
+  } else {
+    error();
+  }
+}
+
+function error() {
+  $code = 400;
+  $text = 'Bad Request';
+
+  $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
+  header($protocol . ' ' . $code . ' ' . $text);
+  $GLOBALS['http_response_code'] = $code;
 }
 
 function handleRequest() {
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($_GET['command'] === 'favorites') {
       $data = get_favorites($_GET['username'], $_GET['password']);
+    } else {
+      error();
     }
   } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['command'] === 'register') {
@@ -61,8 +111,12 @@ function handleRequest() {
       $data = add_favorite($_POST['username'], $_POST['password'], $_POST['favorite']);
     } else if ($_POST['command'] === 'delete_favorite') {
       $data = add_favorite($_POST['username'], $_POST['password'], $_POST['favorite']);
+    } else {
+      error();
     }
-}
+  } else {
+    error();
+  }
   
   header('Content-Type: application/json');
   echo json_encode($data);

@@ -10,6 +10,9 @@ function init(){
   //NHL URL for ESPN RSS feed
   
   // Check if user is logged in
+  if (localStorage.getItem('username') && localStorage.getItem('password')) {
+    getFavorites(localStorage.getItem('username'), localStorage.getItem('password'));
+  }
   // Get user's favorite list
   // Display RSS feed
   loadRssStories();
@@ -73,7 +76,7 @@ function populateStoryList() {
   storyList.forEach(item => {
     //present the item as HTML    
     var line = '<div class="item">';
-    line += '<a href="' + item.logoSrc + '"<img src="' + item.url + '"></a>"';
+    line += '<a href="' + item.logoLink + '"><img src="' + item.logoSrc + '"></a>';
     line += "<h2>" + item.title + "</h2>";
     line += '<p><i>' + item.pubDate + '</i> - <a href="' + item.link + '" target="_blank">See original</a></p>';
     //title and description are always the same (for some reason) so I'm only including one
@@ -87,6 +90,11 @@ function populateStoryList() {
 function logIn() {
   var username = $('input[name="username"]')[0].value;
   var password = $('input[name="password"]')[0].value;
+
+  getFavorites(username, password);
+}
+
+function getFavorites(username, password) {
   $.get('api.php?command=favorites&username=' + username + '&password=' + password).done(data => { 
     localStorage.setItem('username', username);
     localStorage.setItem('password', password);
