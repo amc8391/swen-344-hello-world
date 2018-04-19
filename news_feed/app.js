@@ -7,7 +7,7 @@ $(document).ready(function() {
 });
 
 function init(){
-  //NHL URL for ESPN RSS feed
+  $('#newsFeed').hide();
   
   // Check if user is logged in
   if (localStorage.getItem('username') && localStorage.getItem('password')) {
@@ -48,7 +48,6 @@ function xmlLoaded(obj){
   var image = obj.querySelector("image");
   var logoSrc = image.querySelector("url").firstChild.nodeValue;
   var logoLink = image.querySelector("link").firstChild.nodeValue;
-  // $("#logo").attr("src",logoSrc);
   
   var itemsObjects = Array.from(items).map(newsItem => {
     return {
@@ -59,6 +58,7 @@ function xmlLoaded(obj){
       description: newsItem.querySelector("description").firstChild.nodeValue,
       pubDate: newsItem.querySelector("pubDate").firstChild.nodeValue,
       link: newsItem.querySelector("link").firstChild.nodeValue,
+      guid: newsItem.querySelector("guid").firstChild.nodeValue,
     }
   });
   nodeList = nodeList.concat(items);
@@ -74,16 +74,18 @@ function populateStoryList() {
   $('#storyList').empty();
   
   storyList.forEach(item => {
-    //present the item as HTML    
-    var line = '<div class="item">';
+    //present the item as HTML
+    var line = '<div class="item card row">';
+    line += '<div class="card-body">';
     line += '<a href="' + item.logoLink + '"><img src="' + item.logoSrc + '"></a>';
-    line += "<h2>" + item.title + "</h2>";
+    line += '<h2 class="card-title">' + item.title + "</h2>";
     line += '<p><i>' + item.pubDate + '</i> - <a href="' + item.link + '" target="_blank">See original</a></p>';
     //title and description are always the same (for some reason) so I'm only including one
-    line += "<p>" + item.description + "</p>";
+    line += '<div class="card-text">' + item.description + '</div>';
+    line += '<button class="btn">Add as favorite</button>';
+    line += "</div>";
     line += "</div>";
     $('#storyList').append(line);
-    // $('#storyList').append('<div>' + item.pubDate + '||' +  item.title + '</div>');
   })
 }
 
@@ -95,7 +97,11 @@ function logIn() {
 }
 
 function getFavorites(username, password) {
-  $.get('api.php?command=favorites&username=' + username + '&password=' + password).done(data => { 
+  $.get('api.php', {
+    'command': 'favorites',
+    'username': username,
+    'password': password,
+  }).done(data => { 
     localStorage.setItem('username', username);
     localStorage.setItem('password', password);
     favorites = data;
@@ -113,5 +119,23 @@ function register() {
     'password': password,
   }).done(data => {
     logIn();
+  });
+}
+
+function addFavorite(username, password, favorite) {
+  $.post('api.php', {
+    'command': 'add_favorite',
+    'username': username,
+    'password': password,
+    'favorite': favorite,
+  });
+}
+
+function removeFavorite(username, password, favorite) {
+  $.post('api.php', {
+    'command': 'remove_favorite',
+    'username': username,
+    'password': password,
+    'favorite': favorite,
   });
 }
