@@ -104,16 +104,18 @@ function handleRequest() {
     } else {
       error();
     }
+
   } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['command'] === 'register') {
       $data = register_user($_POST['username'], $_POST['password']);
     } else if ($_POST['command'] === 'add_favorite') {
       $data = add_favorite($_POST['username'], $_POST['password'], $_POST['favorite']);
-    } else if ($_POST['command'] === 'delete_favorite') {
+    } else if ($_POST['command'] === 'remove_favorite') {
       $data = add_favorite($_POST['username'], $_POST['password'], $_POST['favorite']);
     } else {
       error();
     }
+
   } else {
     error();
   }
