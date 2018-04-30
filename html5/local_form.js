@@ -20,6 +20,7 @@ function saveLocalForm() {
     phone: document.getElementsByName('phone')[0].value,
   }
   localStorage.setItem('formData', JSON.stringify(formData));
+  return false;
 }
 
 loadLocalForm();
